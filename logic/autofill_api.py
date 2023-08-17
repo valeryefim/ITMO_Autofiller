@@ -137,11 +137,7 @@ def get_data(cookies, current_url):
     if payment["result"]["payment_type"] == "individual":
         customer = Customer(
             payment_type=payment["result"]["payment_type"],
-            name=payment["result"]["individual"]["full_name"]["first_name"]
-            + " "
-            + payment["result"]["individual"]["full_name"]["last_name"]
-            + " "
-            + payment["result"]["individual"]["full_name"]["middle_name"],
+            name=payment["result"]["individual"]["full_name"]["full_name"],
             address=payment["result"]["individual"]["address"],
             doc_type="Паспорт гражданина РФ",
             number=payment["result"]["individual"]["series"] + payment["result"]["individual"]["number"],
@@ -180,11 +176,11 @@ def fill_contract(user, customer, contract_path="../logic/data/sample_contract_a
     total = {
         "Бизнес-информатика": "1204000 (Один миллион двести четыре тысячи)",
         "Технологии и инновации": "1204000 (Один миллион двести четыре тысячи)",
-        "Управление высокотехнологичным бизнесом": "698000 (Шестьсот девяносто восемь)",
-        "Технологии и стратегии бизнес-трансформации": "698000 (Шестьсот девяносто восемь)",
+        "Управление высокотехнологичным бизнесом": "698000 (Шестьсот девяносто восемь тысяч)",
+        "Технологии и стратегии бизнес-трансформации": "698000 (Шестьсот девяносто восемь тысяч)",
         "Цифровые продукты: создание и управление": "760000 (Семьсот шестьдесят тысяч)",
         "Стратегическое управление интеллектуальной собственностью / IP Management Strategy": "698000 (Шестьсот "
-        "девяносто восемь)",
+        "девяносто восемь тысяч)",
     }
 
     contract = Document(contract_path)
@@ -347,10 +343,3 @@ def autofill(cookies, current_url, semesters):
     user, customer = get_data(cookies, current_url)
     fill_contract(user, customer)
     fill_receipt(user, customer, semesters)
-
-
-if __name__ == "__main__":
-    cookie = "__ddg1_=DnvGJxZGJS1b8Z6JGV9R; _ga_K1E3SJW9RB=GS1.1.1687698828.7.0.1687698837.0.0.0; _ym_uid=1644441470443176458; _ym_d=1687790885; _gcl_au=1.1.376710900.1687795991; _ga_VBCPPQG8SR=GS1.1.1687944787.1.1.1687944800.0.0.0; _ga_6WNL1RBXB9=GS1.2.1689839868.6.0.1689839868.0.0.0; _ga_K8R8VFV12P=GS1.2.1689839868.6.0.1689839868.60.0.0; _ga=GA1.1.926234014.1687796086; _ga_EG4H99E35G=GS1.1.1689950977.31.1.1689951063.0.0.0; _ym_isad=2; access_token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwSVliSmNVLW1wbEdBdzhFMzNSNkNKTUdWa3hZdUQ2eUItdWt3RlBJOXV3In0.eyJleHAiOjE2OTAxOTkyNjcsImlhdCI6MTY5MDE5NzQ2NywiYXV0aF90aW1lIjoxNjg2OTE1MTQ4LCJqdGkiOiJmNWQ5YjA2Ni02ZWE0LTQyMmQtYTIxYy0zMWY1MTIzYThjNGQiLCJpc3MiOiJodHRwczovL2lkLml0bW8ucnUvYXV0aC9yZWFsbXMvaXRtbyIsInN1YiI6IjU5YjY1MDI0LTE4NWItNDMxYS1hOWRlLWUzYTM4MTA5ZTAzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFiaXQtbGsiLCJzZXNzaW9uX3N0YXRlIjoiMjI2Y2Q0OGYtNjc3Ni00ZDI2LWEzODYtNDkxZmJmY2Y0ZGIzIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2FiaXRsay5pdG1vLnJ1Il0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHBob25lIHByb2ZpbGUiLCJzaWQiOiIyMjZjZDQ4Zi02Nzc2LTRkMjYtYTM4Ni00OTFmYmZjZjRkYjMiLCJpc3UiOjMxMjY2NSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZHB0Z28iLCJlbWFpbCI6ImRuX3N0QGJrLnJ1In0.AELXdUe5rFrRVqrgqJEJuzm0XHj1rWf5TP5WgkrzYgZO93qLcGhXNWY1SZQk3_5e38L8FtPBlyJIraa4UvSqf3Afg-nmtbfxu1jNDlndjvWQ_xJlxELH8hKv_3OF4C_-0xrOGGekhidxE0MH5t-WjQSCucA7nkYCXbwECtgd09U8_JSgDTwksNMawtArvQkxwmpiTgfDVwQFqvDWoYvw9olgHh-AiLh4gp1a_7ciom3z4Mo1OJ8Y24qT11IqGbQuODxZwSbv9Uf_tn_A3xVT3bDIhOzO7KVpG3avNirrFq5sYAreA6I1nYfn5uj8Iq5hq3FHLFQPeJirDbAI4c-PHg; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjNTcxMzVjYy01ZjEwLTQ4ZTAtYTU5ZS1lYTYwMmY3ZTcxYzAifQ.eyJleHAiOjE2OTI3ODk0NjcsImlhdCI6MTY5MDE5NzQ2NywianRpIjoiZjA4ODgyYjMtZTE1MC00YjZhLWFkOGEtNDRiOWIzM2NjZTBlIiwiaXNzIjoiaHR0cHM6Ly9pZC5pdG1vLnJ1L2F1dGgvcmVhbG1zL2l0bW8iLCJhdWQiOiJodHRwczovL2lkLml0bW8ucnUvYXV0aC9yZWFsbXMvaXRtbyIsInN1YiI6IjU5YjY1MDI0LTE4NWItNDMxYS1hOWRlLWUzYTM4MTA5ZTAzOSIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhYml0LWxrIiwic2Vzc2lvbl9zdGF0ZSI6IjIyNmNkNDhmLTY3NzYtNGQyNi1hMzg2LTQ5MWZiZmNmNGRiMyIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHBob25lIHByb2ZpbGUiLCJzaWQiOiIyMjZjZDQ4Zi02Nzc2LTRkMjYtYTM4Ni00OTFmYmZjZjRkYjMifQ.Q2ofhwMjbnY1Cte1CSYtYT25Y4WkQQNJS4KGPJVK_-E; _ym_visorc=b"
-    url = "https://abitlk.itmo.ru/window/0/questionnaire/29985/45949/programs"
-
-    autofill(cookie, url)
