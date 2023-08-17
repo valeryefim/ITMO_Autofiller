@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, send_from_directory, flash, r
 from flask_cors import CORS
 import io
 from logic.autofill_api import autofill
-from logic.contract import autofill_contract
-from logic.receipt import autofill_receipt
 import pandas as pd
 
 app = Flask(__name__)
